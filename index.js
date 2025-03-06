@@ -7,7 +7,7 @@ const PORT = 3000;
 
 app.use(express.json());
 
-// Add a new document
+
 app.post("/documents", (req, res) => {
     const { content } = req.body;
     if (!content) return res.status(400).json({ error: "Content is required" });
@@ -20,7 +20,7 @@ app.post("/documents", (req, res) => {
     res.json({ id, content });
 });
 
-// Retrieve a document by ID
+
 app.get("/documents/:id", (req, res) => {
     const ID = req.params.id;
     const data = readData();
@@ -29,7 +29,7 @@ app.get("/documents/:id", (req, res) => {
     content ? res.json({ id: ID, content }) : res.status(404).json({ error: "Document not found" });
 });
 
-// Submit a search query
+
 app.post("/searches", (req, res) => {
     const { documentId, term } = req.body;
     const data = readData();
@@ -43,7 +43,7 @@ app.post("/searches", (req, res) => {
     res.json({ id: searchId, documentId, term });
 });
 
-// Retrieve search results
+
 app.get("/searches/:id/solve", (req, res) => {
     const data = readData();
     const search = data.searches[req.params.id];
